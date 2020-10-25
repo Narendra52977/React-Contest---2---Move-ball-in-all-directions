@@ -32,7 +32,8 @@ const App = () => {
         default:
           break;
       }
-      setBallPosition({ left: x + "px", top: y + "px" });
+    let copyPostion={...ballPosition}
+      setBallPosition(copyPosition);
     });
   })
   const renderChoice = () => {
