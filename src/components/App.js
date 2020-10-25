@@ -13,6 +13,28 @@ const App = () => {
     setX(0);
     setY(0);
   };
+  useEffect(()=>{
+    
+  document.addEventListener("keydown", (event) => {
+      switch (event.keyCode) {
+        case 37:
+          setX(x - 5);
+          break;
+        case 38:
+          setX(y + 5);
+          break;
+        case 39:
+          setX(x + 5);
+          break;
+        case 40:
+          setY(y + 5);
+          break;
+        default:
+          break;
+      }
+      setBallPosition({ left: x + "px", top: y + "px" });
+    });
+  })
   const renderChoice = () => {
     if (renderBall) {
       return <div className="ball" style={ballPosition}></div>;
