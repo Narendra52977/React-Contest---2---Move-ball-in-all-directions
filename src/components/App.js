@@ -27,7 +27,7 @@ const App = () => {
           setX(x + 5);
           break;
         case 40:
-          setY(y + 5);
+          setY(y - 5);
           break;
         default:
           break;
