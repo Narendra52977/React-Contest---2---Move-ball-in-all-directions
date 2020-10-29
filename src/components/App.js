@@ -13,29 +13,46 @@ const App = () => {
     setX(0);
     setY(0);
   };
+  const handlePress=(event)=>{
+  if(event.keyCode===37) {
+      
+          setX(x - 5);
+  }
+         
+    else   if(event.keyCode===38) {
+      
+          setY(y + 5);
+  }
+      else  if(event.keyCode===39) {
+      
+          setX(x + 5);
+  }
+     else  if(event.keyCode===40) {
+      
+          setY(y - 5);
+  }
+      
+  }
   useEffect(()=>{
     
-  document.addEventListener("keydown", (event) => {
-      switch (event.keyCode) {
-        case 37:
-          setX(x - 5);
-          break;
-        case 38:
-          setX(y + 5);
-          break;
-        case 39:
-          setX(x + 5);
-          break;
-        case 40:
-          setY(y - 5);
-          break;
-        default:
-          break;
-      }
-    let copyPostion={...ballPosition}
-      setBallPosition(copyPosition);
-    });
+  document.addEventListener("keydown", (event) => handlePress(event))
+   return ()=>document.removeEventListener("keydown",handlePress);   
+   
+  });
+  useEffect(()=>{
+    
+  setBallPosition({
+    left: x+"px",
+    top: y+"px";
   })
+  },[x]);
+  useEffect(()=>{
+    
+  setBallPosition({
+    left: x+"px",
+    top: y+"px";
+  })
+  },[y]);
   const renderChoice = () => {
     if (renderBall) {
       return <div className="ball" style={ballPosition}></div>;
