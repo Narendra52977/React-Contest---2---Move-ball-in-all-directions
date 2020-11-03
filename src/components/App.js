@@ -2,6 +2,7 @@ import React, { Component, useState,useEffect } from "react";
 import "../styles/App.css";
 
 const App = () => {
+ 
   const [renderBall, setRenderBall] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -18,57 +19,54 @@ const App = () => {
       top: "0px"
     });
   };
-  const handlePress=(event)=>{
-  if(event.keyCode===37) {
-     let value = x - 5;
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 37) {
+      let value = x - 5;
       setX(value);
       setBallPosition({
         left: value + "px",
-        top: y + "px"
+        top: setY + "px"
       });
-  }
-         
-    else   if(event.keyCode===38) {
-      let value = y+5;
+    } else if (event.keyCode === 38) {
+      let value = y - 5;
+
       setY(value);
       setBallPosition({
-        left: x + "px",
+        left: setX + "px",
         top: value + "px"
       });
-        
-  }
-      else  if(event.keyCode===39) {
+    } else if (event.keyCode === 39) {
       let value = x + 5;
       setX(value);
       setBallPosition({
         left: value + "px",
-        top: y + "px"
+        top: setY + "px"
       });
-  }
-     else  if(event.keyCode===40) {
-      let value = y-5;
+    } else if (event.keyCode === 40) {
+      let value = y + 5;
       setY(value);
       setBallPosition({
-        left: x + "px",
+        left: setX + "px",
         top: value + "px"
       });
-  }
-      
-  }
-  useEffect(()=>{
-    
-  document.addEventListener("keydown", (event) => handlePress(event))}
-   return ()=>{document.removeEventListener("keydown",handlePress);   
-   
+    }
+  };
+
+  const start = () => {
+    setRenderBall(true);
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
   });
- 
+
   const renderChoice = () => {
     if (renderBall) {
       return <div className="ball" style={ballPosition}></div>;
     } else
       return (
-        <button className="start" onClick={() => setRenderBall(true)}>
-          start
+        <button onClick={start} className="start">
+          Start
         </button>
       );
   };
@@ -78,9 +76,12 @@ const App = () => {
       <button onClick={reset} className="reset">
         Reset
       </button>
-      {renderChoice()}:
+
+      {renderChoice()}
     </div>
   );
+
+
 };
 
 export default App;
